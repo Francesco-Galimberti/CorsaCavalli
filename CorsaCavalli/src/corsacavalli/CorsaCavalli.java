@@ -36,16 +36,15 @@ public class CorsaCavalli {
             Scanner input = new Scanner(System.in);
 
             DatiCondivisi dati = new DatiCondivisi();
-            Semaforo mutex = new Semaforo(1);
             Semaforo sincro1 = new Semaforo(1);
             Semaforo sincro2 = new Semaforo(0);
 
-            ThCorsa Clop1 = new ThCorsa(1, dati, mutex, sincro1, sincro2);
-            ThCorsa Clop2 = new ThCorsa(2, dati, mutex, sincro1, sincro2);
-            ThCorsa Clop3 = new ThCorsa(3, dati, mutex, sincro1, sincro2);
-            ThCorsa Clop4 = new ThCorsa(4, dati, mutex, sincro1, sincro2);
-            ThCorsa Clop5 = new ThCorsa(5, dati, mutex, sincro1, sincro2);
-            ThVisualizza tv = new ThVisualizza(dati, mutex, sincro1, sincro2);
+            ThCorsa Clop1 = new ThCorsa(1, dati, sincro1, sincro2);
+            ThCorsa Clop2 = new ThCorsa(2, dati, sincro1, sincro2);
+            ThCorsa Clop3 = new ThCorsa(3, dati, sincro1, sincro2);
+            ThCorsa Clop4 = new ThCorsa(4, dati, sincro1, sincro2);
+            ThCorsa Clop5 = new ThCorsa(5, dati, sincro1, sincro2);
+            ThVisualizza tv = new ThVisualizza(dati, sincro1, sincro2);
 
             System.out.println("Su che cavallo punti? 1/2/3/4/5");
             int numCav = input.nextInt();
@@ -65,12 +64,12 @@ public class CorsaCavalli {
                 }
             }
             if (s.equals("")) {
+                tv.interrupt();
                 Clop1.interrupt();
                 Clop2.interrupt();
                 Clop3.interrupt();
                 Clop4.interrupt();
                 Clop5.interrupt();
-                tv.interrupt();
             }
 
             //attendi
@@ -79,7 +78,7 @@ public class CorsaCavalli {
             Clop3.join();
             Clop4.join();
             Clop5.join();
-
+            
             int max = 0;
             int nCavallo = 0;
             if (dati.getnClop1() > max) {

@@ -33,14 +33,6 @@ public class ThCorsa extends Thread {
     /**
      * @author Galimberti_Francesco
      *
-     * Dichiarazione dell'attributo puntatore che servirà a garantire la mutua
-     * esclusione nell'accesso alla variabile condivisa
-     */
-    private Semaforo ptrMutex;
-
-    /**
-     * @author Galimberti_Francesco
-     *
      * Dichiarazione dell'attributo puntatore che servirà a garantire la
      * sincronizzazione tra i Thread
      */
@@ -64,17 +56,14 @@ public class ThCorsa extends Thread {
      * inizializzare l'attributo che memorizza il numero del cavallo
      * @param dati il parametro serve a passare al metodo un puntatore
      * DatiCondivisi dove verrà memorizzato il numero di galoppi del cavallo
-     * @param mutex il parametro serve a passare al metodo un puntatore Semaforo
-     * per garantire la mutua esclusione
      * @param sincro1 il parametro serve a passare al metodo un puntatore Semaforo
      * per garantire la sincronizzazione
      * @param sincro2 il parametro serve a passare al metodo un puntatore Semaforo
      * per garantire la sincronizzazione
      */
-    public ThCorsa(int nT, DatiCondivisi dati, Semaforo mutex, Semaforo sincro1, Semaforo sincro2) {
+    public ThCorsa(int nT, DatiCondivisi dati,Semaforo sincro1, Semaforo sincro2) {
         this.nThread = nT;
         this.ptrDati = dati;
-        this.ptrMutex = mutex;
         this.ptrSincro1 = sincro1;
         this.ptrSincro2 = sincro2;
     }
@@ -96,31 +85,25 @@ public class ThCorsa extends Thread {
                 nC++;
 
                 ptrSincro2.Wait();
-                ptrMutex.Wait();
                 switch (this.nThread) {
                     case 1:
                         ptrDati.setnClop1(nC);
-                        ptrMutex.Signal();
                         break;
 
                     case 2:
                         ptrDati.setnClop2(nC);
-                        ptrMutex.Signal();
                         break;
 
                     case 3:
                         ptrDati.setnClop3(nC);
-                        ptrMutex.Signal();
                         break;
 
                     case 4:
                         ptrDati.setnClop4(nC);
-                        ptrMutex.Signal();
                         break;
 
                     case 5:
                         ptrDati.setnClop5(nC);
-                        ptrMutex.Signal();
                         break;
                 }
                 ptrSincro1.Signal();
