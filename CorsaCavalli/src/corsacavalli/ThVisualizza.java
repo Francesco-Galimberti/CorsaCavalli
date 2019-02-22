@@ -68,18 +68,13 @@ public class ThVisualizza extends Thread {
         while (true) {
             ptrSincro1.Wait();
             
-            System.out.println("Numero galoppi:");            
-            System.out.println("Clop1 --> " + ptrDati.getnClop1());
-            System.out.println("Clop2 --> " + ptrDati.getnClop2());
-            System.out.println("Clop3 --> " + ptrDati.getnClop3());
-            System.out.println("Clop4 --> " + ptrDati.getnClop4());
-            System.out.println("Clop5 --> " + ptrDati.getnClop5());
+            ptrDati.visualizzaCavalli();
             
-           ptrSincro2.Signal();
-
             if (Thread.currentThread().isInterrupted()) {
                 break;
             }
+            
+            ptrSincro2.Signal();
         }
     }
 }

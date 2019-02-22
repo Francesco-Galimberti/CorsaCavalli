@@ -70,14 +70,15 @@ public class CorsaCavalli {
                 Clop3.interrupt();
                 Clop4.interrupt();
                 Clop5.interrupt();
-            }
-
+            }            
             //attendi
-            Clop1.join();
-            Clop2.join();
-            Clop3.join();
-            Clop4.join();
-            Clop5.join();
+            dati.waitSem1();
+            dati.waitSem2();
+            dati.waitSem3();
+            dati.waitSem4();
+            dati.waitSem5();   
+            
+            sincro1.Signal();
             
             int max = 0;
             int nCavallo = 0;
