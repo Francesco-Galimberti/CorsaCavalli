@@ -64,7 +64,6 @@ public class CorsaCavalli {
                 }
             }
             if (s.equals("")) {
-                tv.interrupt();
                 Clop1.interrupt();
                 Clop2.interrupt();
                 Clop3.interrupt();
@@ -76,9 +75,12 @@ public class CorsaCavalli {
             dati.waitSem2();
             dati.waitSem3();
             dati.waitSem4();
-            dati.waitSem5();   
+            dati.waitSem5();
             
-            sincro1.Signal();
+            if(ThVisualizza.currentThread().isAlive()){
+                sincro1.Signal();
+                tv.interrupt();
+            }
             
             int max = 0;
             int nCavallo = 0;

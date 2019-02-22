@@ -66,13 +66,12 @@ public class ThVisualizza extends Thread {
     public void run() {
 
         while (true) {
-            ptrSincro1.Wait();
-            
-            ptrDati.visualizzaCavalli();
+            ptrSincro1.Wait();           
             
             if (Thread.currentThread().isInterrupted()) {
                 break;
             }
+            ptrDati.visualizzaCavalli();
             
             ptrSincro2.Signal();
         }
