@@ -10,9 +10,6 @@ public class CorsaCavalli {
     public static void main(String[] args) {
 
         try {
-            java.io.BufferedReader console = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-            Scanner input = new Scanner(System.in);
-
             DatiCondivisi dati = new DatiCondivisi();
             Semaforo sincro1 = new Semaforo(1);
             Semaforo sincro2 = new Semaforo(0);
@@ -44,7 +41,7 @@ public class CorsaCavalli {
             dati.waitSem3();
             dati.waitSem4();
             dati.waitSem5();
-
+            
             if (ThVisualizza.currentThread().isAlive()) {
                 sincro1.Signal();
                 tv.interrupt();
